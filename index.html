@@ -62,7 +62,7 @@
     margin:0 auto;
     padding:clamp(18px,3.4vh,44px) clamp(20px,4.5vw,56px);
     display:grid;
-    grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);
+    grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);
     grid-template-areas:
       "head jar"
       "form jar";
@@ -129,7 +129,7 @@
   /* SELO / POTE */
   .jar-stage{
     position:relative;
-    --jar-h:clamp(240px,48vh,352px);
+    --jar-h:clamp(260px,58vh,430px);
     height:var(--jar-h);
     width:calc(var(--jar-h) * 0.867);
   }
@@ -407,8 +407,8 @@
       row-gap:clamp(14px,2.6vh,24px);
       padding:clamp(18px,3vh,32px) clamp(18px,5vw,28px);
     }
-    .jar-col{ align-self:start; max-width:44vw; }
-    .jar-stage{ --jar-h:clamp(160px,25vh,220px); }
+    .jar-col{ align-self:start; max-width:52vw; }
+    .jar-stage{ --jar-h:min(clamp(190px,32vh,280px), 56vw); }
     .sub{ max-width:none; text-align:left; }
     .count{ font-size:8.5px; letter-spacing:0.1em; bottom:8%; }
     .empty-msg{ font-size:10.5px; width:42%; }
