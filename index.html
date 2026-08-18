@@ -6,22 +6,18 @@
 <title>Pote da Gratidão</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Prata&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#fdfaf5;
-    --bg-warm:#f7eee1;
-    --card:#ffffff;
-    --ink:#4a3b30;
-    --ink-soft:#6d5c4e;
-    --muted:#9d8b79;
-    --honey:#d2913f;
-    --honey-deep:#b4762a;
-    --paper:#f7e7c8;
-    --paper-2:#eed6a8;
-    --line:rgba(74,59,48,0.10);
-    --line-strong:rgba(74,59,48,0.16);
-    --shadow:0 18px 40px -22px rgba(90,66,40,0.38);
+    --paper:#f5f0e2;          /* fundo, papel */
+    --paper-light:#fdfaf2;    /* cartões e selo */
+    --ink:#2f3733;            /* tinta */
+    --ink-soft:#59615b;
+    --muted:#8d8b7d;
+    --sage:#71856f;           /* acento */
+    --sage-deep:#5c6f5b;
+    --line:rgba(47,55,51,0.14);
+    --line-strong:rgba(47,55,51,0.30);
   }
 
   *{box-sizing:border-box;}
@@ -30,24 +26,32 @@
     margin:0;
     padding:0;
     height:100%;
-    background:var(--bg);
+    background:var(--paper);
     color:var(--ink-soft);
-    font-family:'Inter', sans-serif;
+    font-family:'EB Garamond', Georgia, serif;
+    font-size:16px;
     -webkit-font-smoothing:antialiased;
   }
 
   body{ overflow:hidden; }
 
-  /* luz quente de fundo */
-  .glowfield{
+  /* papel: leve granulado + luz quente */
+  .paperfield{
     position:fixed;
     inset:0;
     pointer-events:none;
     z-index:0;
     background:
-      radial-gradient(60% 55% at 78% 30%, rgba(232,178,102,0.22) 0%, transparent 70%),
-      radial-gradient(45% 45% at 12% 78%, rgba(233,196,150,0.18) 0%, transparent 72%),
-      linear-gradient(170deg, #fffdf9 0%, var(--bg-warm) 100%);
+      radial-gradient(58% 52% at 76% 26%, rgba(255,252,244,0.9) 0%, transparent 72%),
+      radial-gradient(48% 44% at 10% 82%, rgba(255,253,247,0.55) 0%, transparent 74%),
+      var(--paper);
+  }
+  .paperfield::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    opacity:0.22;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E");
   }
 
   .wrap{
@@ -83,53 +87,51 @@
   .eyebrow{
     font-size:11px;
     font-weight:500;
-    letter-spacing:0.24em;
+    letter-spacing:0.3em;
     text-transform:uppercase;
-    color:var(--honey-deep);
-    margin-bottom:10px;
+    color:var(--sage-deep);
+    margin-bottom:12px;
   }
 
   h1{
-    font-family:'Cormorant Garamond', serif;
-    font-weight:600;
-    font-style:italic;
-    font-size:clamp(29px,3.7vw,42px);
-    line-height:1.05;
+    font-family:'Prata', 'EB Garamond', serif;
+    font-weight:400;
+    font-size:clamp(29px,3.6vw,42px);
+    line-height:1.12;
     color:var(--ink);
-    margin:0 0 10px;
+    margin:0 0 12px;
     letter-spacing:0.005em;
   }
 
   .sub{
-    font-size:clamp(13.5px,1.1vw,15px);
+    font-size:clamp(15px,1.2vw,17px);
     color:var(--ink-soft);
-    max-width:38ch;
+    max-width:40ch;
     line-height:1.6;
-    margin:0 0 clamp(16px,2.6vh,26px);
+    margin:0;
+    text-align:justify;
+    hyphens:auto;
   }
 
   .count{
-    font-size:12.5px;
+    position:absolute;
+    left:14%; right:14%;
+    bottom:12%;
+    font-size:10.5px;
     color:var(--muted);
-    letter-spacing:0.02em;
-    margin-top:14px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
     text-align:center;
+    line-height:1.3;
   }
-  .count b{ color:var(--honey-deep); font-weight:600; }
+  .count b{ color:var(--sage-deep); font-weight:600; }
 
-  /* POTE */
+  /* SELO / POTE */
   .jar-stage{
     position:relative;
-    --jar-h:clamp(230px,46vh,340px);
+    --jar-h:clamp(240px,48vh,352px);
     height:var(--jar-h);
     width:calc(var(--jar-h) * 0.867);
-  }
-
-  .jar-glow{
-    position:absolute;
-    inset:-14% -20%;
-    background:radial-gradient(ellipse at 50% 58%, rgba(233,175,95,0.30), rgba(233,175,95,0.10) 48%, transparent 72%);
-    filter:blur(10px);
   }
 
   svg.jar-svg{
@@ -137,43 +139,41 @@
     inset:0;
     width:100%;
     height:100%;
-    overflow:visible;
+    filter:drop-shadow(0 10px 18px rgba(47,55,51,0.10));
   }
 
   .notes-layer{
     position:absolute;
-    left:0; right:0;
-    bottom:11.5%;
-    height:66%;
+    left:33%;
+    width:34%;
+    bottom:23.5%;
+    height:22%;
     overflow:hidden;
-    -webkit-mask-image:linear-gradient(to bottom, transparent 0px, black 14px);
-    mask-image:linear-gradient(to bottom, transparent 0px, black 14px);
   }
 
   .note-chip{
     position:absolute;
-    width:calc(var(--jar-h) * 0.065);
-    height:calc(var(--jar-h) * 0.047);
-    background:linear-gradient(135deg, var(--paper), var(--paper-2));
-    border-radius:2px;
-    box-shadow:0 1px 3px rgba(120,90,50,0.22), inset 0 0 0 1px rgba(255,255,255,0.45);
+    width:calc(var(--jar-h) * 0.052);
+    height:calc(var(--jar-h) * 0.038);
+    background:var(--paper-light);
+    border:1px solid rgba(47,55,51,0.35);
+    border-radius:1px;
     opacity:0;
     animation:dropIn 0.7s cubic-bezier(.2,.9,.3,1.2) forwards;
   }
 
   @keyframes dropIn{
-    0%{ transform:translateY(-160px) rotate(0deg) scale(0.8); opacity:0; }
+    0%{ transform:translateY(-120px) rotate(0deg) scale(0.8); opacity:0; }
     60%{ opacity:1; }
     100%{ transform:translateY(0) rotate(var(--rot,0deg)) scale(1); opacity:1; }
   }
 
   .empty-msg{
     position:absolute;
-    left:50%; bottom:26%;
+    left:50%; bottom:32%;
     transform:translateX(-50%);
-    width:50%;
+    width:36%;
     text-align:center;
-    font-family:'Cormorant Garamond', serif;
     font-size:13px;
     color:var(--muted);
     font-style:italic;
@@ -183,29 +183,30 @@
   /* FORMULÁRIO */
   .card{
     width:100%;
-    background:var(--card);
+    background:var(--paper-light);
     border:1px solid var(--line);
-    border-radius:20px;
-    padding:clamp(14px,2vh,20px) 18px;
-    box-shadow:var(--shadow);
+    border-radius:3px;
+    padding:clamp(14px,2vh,20px) 20px;
+    box-shadow:0 14px 28px -22px rgba(47,55,51,0.5);
   }
 
   .btn-suggest{
-    background:rgba(210,145,63,0.10);
-    color:var(--honey-deep);
-    border:1px solid rgba(210,145,63,0.26);
-    padding:6px 14px;
-    border-radius:999px;
-    font-size:12px;
+    background:transparent;
+    color:var(--sage-deep);
+    border:1px solid rgba(113,133,111,0.4);
+    padding:7px 14px;
+    border-radius:2px;
+    font-size:10.5px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
   }
-  .btn-suggest:hover{ background:rgba(210,145,63,0.18); }
+  .btn-suggest:hover{ background:rgba(113,133,111,0.10); }
 
   .suggest-text{
-    font-family:'Cormorant Garamond', serif;
+    font-size:17px;
     font-style:italic;
-    font-size:16px;
     color:var(--ink);
-    margin-top:9px;
+    margin-top:11px;
     line-height:1.35;
     min-height:46px;
     cursor:pointer;
@@ -213,26 +214,25 @@
   .suggest-text:empty{ cursor:default; }
   .suggest-text:empty::before{
     content:'sem pressa — toque no botão se quiser um empurrãozinho';
-    font-size:14px;
     color:var(--muted);
   }
   .suggest-text .tag{
     display:block;
-    font-family:'Inter', sans-serif;
     font-style:normal;
     font-size:10px;
-    letter-spacing:0.12em;
+    letter-spacing:0.2em;
     text-transform:uppercase;
     color:var(--muted);
-    margin-bottom:3px;
+    margin-bottom:4px;
   }
   .suggest-hint{
     display:block;
-    font-family:'Inter', sans-serif;
     font-style:normal;
-    font-size:10.5px;
+    font-size:10px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
     color:var(--muted);
-    margin-top:4px;
+    margin-top:6px;
   }
 
   .divider{
@@ -249,64 +249,60 @@
     border:none;
     outline:none;
     color:var(--ink);
-    font-family:'Inter', sans-serif;
-    font-size:14.5px;
-    line-height:1.65;
-    padding:0;
-    caret-color:var(--honey-deep);
-  }
-  textarea::placeholder{
-    color:var(--muted);
-    font-family:'Cormorant Garamond', serif;
-    font-style:italic;
+    font-family:'EB Garamond', Georgia, serif;
     font-size:17px;
+    line-height:1.6;
+    padding:0;
+    caret-color:var(--sage-deep);
   }
+  textarea::placeholder{ color:var(--muted); font-style:italic; }
 
   .card-foot{
     display:flex;
     justify-content:flex-end;
-    margin-top:8px;
+    margin-top:10px;
   }
 
   button{
-    font-family:'Inter', sans-serif;
-    font-weight:500;
-    font-size:13.5px;
-    letter-spacing:0.02em;
+    font-family:'EB Garamond', Georgia, serif;
     cursor:pointer;
     border:none;
     outline:none;
     transition:transform 0.15s ease, opacity 0.15s ease, background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
   }
-  button:active{ transform:scale(0.97); }
-  button:focus-visible{ outline:2px solid var(--honey); outline-offset:2px; }
+  button:active{ transform:scale(0.98); }
+  button:focus-visible{ outline:1px solid var(--sage); outline-offset:3px; }
 
   .btn-primary{
-    background:linear-gradient(135deg, var(--honey), var(--honey-deep));
-    color:#fffaf1;
-    font-weight:600;
-    padding:9px 20px;
-    border-radius:999px;
-    box-shadow:0 8px 18px -10px rgba(180,118,42,0.9);
+    background:var(--ink);
+    color:var(--paper-light);
+    padding:11px 22px;
+    border-radius:2px;
+    font-size:11px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
   }
-  .btn-primary:disabled{ opacity:0.32; cursor:default; box-shadow:none; }
+  .btn-primary:disabled{ opacity:0.3; cursor:default; }
 
   .btn-ghost{
     background:transparent;
-    color:var(--ink-soft);
+    color:var(--ink);
     border:1px solid var(--line-strong);
-    padding:11px 20px;
-    border-radius:999px;
+    padding:12px 20px;
+    border-radius:2px;
     width:100%;
+    font-size:11px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
   }
-  .btn-ghost:hover{ border-color:var(--honey); color:var(--honey-deep); background:rgba(210,145,63,0.06); }
+  .btn-ghost:hover{ border-color:var(--sage); color:var(--sage-deep); }
 
-  .actions{ width:100%; margin-top:10px; }
+  .actions{ width:100%; margin-top:12px; }
 
-  /* MODAL */
+  /* PAPELZINHO SORTEADO */
   .veil{
     position:fixed; inset:0;
-    background:rgba(74,59,48,0.30);
+    background:rgba(47,55,51,0.30);
     backdrop-filter:blur(4px);
     display:flex; align-items:center; justify-content:center;
     z-index:10;
@@ -318,14 +314,14 @@
   .veil.show{ opacity:1; pointer-events:auto; }
 
   .drawn-note{
-    background:linear-gradient(160deg, #fffdf7, #f6e9d1);
+    background:var(--paper-light);
     color:var(--ink);
     width:100%;
-    max-width:330px;
-    border-radius:6px;
-    padding:34px 26px;
+    max-width:340px;
+    border-radius:2px;
+    padding:36px 30px 28px;
     text-align:center;
-    box-shadow:0 26px 60px -20px rgba(90,66,40,0.55);
+    box-shadow:0 26px 60px -20px rgba(47,55,51,0.5);
     transform:scale(0.9) rotate(-1.5deg);
     transition:transform 0.35s cubic-bezier(.2,.9,.3,1.3);
     position:relative;
@@ -334,43 +330,51 @@
 
   .drawn-note::before{
     content:'';
-    position:absolute; inset:10px;
-    border:1px dashed rgba(120,90,50,0.22);
-    border-radius:3px;
+    position:absolute; inset:9px;
+    border:1px dashed rgba(47,55,51,0.28);
     pointer-events:none;
   }
 
   .drawn-label{
-    font-weight:500;
-    font-size:10.5px;
-    letter-spacing:0.18em;
+    font-size:10px;
+    letter-spacing:0.24em;
     text-transform:uppercase;
-    color:var(--honey-deep);
-    margin-bottom:14px;
+    color:var(--sage-deep);
+    margin-bottom:16px;
   }
 
   .drawn-text{
-    font-family:'Cormorant Garamond', serif;
-    font-style:italic;
-    font-weight:500;
-    font-size:24px;
-    line-height:1.5;
+    font-family:'Prata', 'EB Garamond', serif;
+    font-size:23px;
+    line-height:1.45;
     color:var(--ink);
   }
 
   .drawn-date{
-    font-size:10.5px;
+    font-size:10px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
     color:var(--muted);
     margin-top:16px;
   }
 
+  .signature{
+    font-family:'Mrs Saint Delafield', cursive;
+    font-size:30px;
+    line-height:1;
+    color:var(--sage-deep);
+    margin-top:14px;
+  }
+
   .close-x{
-    margin-top:22px;
+    margin-top:16px;
     background:transparent;
     color:var(--muted);
-    font-size:12px;
+    font-size:10px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
     text-decoration:underline;
-    text-underline-offset:3px;
+    text-underline-offset:4px;
   }
 
   .toast{
@@ -378,12 +382,13 @@
     bottom:26px; left:50%;
     transform:translateX(-50%) translateY(20px);
     background:var(--ink);
-    color:#fdf7ec;
-    font-weight:500;
-    font-size:13px;
-    padding:10px 18px;
-    border-radius:999px;
-    box-shadow:0 12px 30px -12px rgba(74,59,48,0.7);
+    color:var(--paper-light);
+    font-size:10.5px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    padding:11px 20px;
+    border-radius:2px;
+    box-shadow:0 12px 30px -14px rgba(47,55,51,0.8);
     opacity:0;
     transition:all 0.3s ease;
     z-index:20;
@@ -391,7 +396,7 @@
   }
   .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 
-  /* telas estreitas ou baixas: pote menor, ao lado do título */
+  /* telas estreitas ou baixas: selo menor, ao lado do título */
   @media (max-width:860px), (max-height:600px){
     .wrap{
       grid-template-columns:minmax(0,1fr) auto;
@@ -403,10 +408,10 @@
       padding:clamp(18px,3vh,32px) clamp(18px,5vw,28px);
     }
     .jar-col{ align-self:start; max-width:44vw; }
-    .jar-stage{ --jar-h:clamp(150px,24vh,210px); }
-    .sub{ max-width:none; }
-    .count{ margin-top:10px; font-size:11.5px; }
-    .empty-msg{ font-size:11.5px; }
+    .jar-stage{ --jar-h:clamp(160px,25vh,220px); }
+    .sub{ max-width:none; text-align:left; }
+    .count{ font-size:8.5px; letter-spacing:0.1em; bottom:8%; }
+    .empty-msg{ font-size:10.5px; width:42%; }
   }
 
   /* espaço muito curto: libera a rolagem em vez de espremer */
@@ -423,7 +428,7 @@
 </head>
 <body>
 
-<div class="glowfield"></div>
+<div class="paperfield"></div>
 
 <main class="wrap">
   <header class="head">
@@ -434,7 +439,7 @@
 
   <section class="form">
     <div class="card">
-      <button class="btn-suggest" id="suggestBtn">✦ me dá uma ideia</button>
+      <button class="btn-suggest" id="suggestBtn">me dá uma ideia</button>
       <div class="suggest-text" id="suggestText"></div>
       <div class="divider"></div>
       <textarea id="noteInput" placeholder="Hoje eu sou grata por…" maxlength="200"></textarea>
@@ -450,43 +455,40 @@
 
   <aside class="jar-col">
     <div class="jar-stage">
-      <div class="jar-glow"></div>
       <svg class="jar-svg" viewBox="0 0 260 300" fill="none">
-        <defs>
-          <linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
-            <stop offset="45%" stop-color="#f3dfbc" stop-opacity="0.45"/>
-            <stop offset="100%" stop-color="#e3bd85" stop-opacity="0.40"/>
-          </linearGradient>
-          <linearGradient id="lidGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#e2be89"/>
-            <stop offset="100%" stop-color="#b98d55"/>
-          </linearGradient>
-        </defs>
-        <!-- tampa -->
-        <rect x="88" y="18" width="84" height="20" rx="6" fill="url(#lidGrad)"/>
-        <rect x="94" y="10" width="72" height="14" rx="6" fill="#cfa66f"/>
-        <!-- corpo -->
-        <path d="M96 38
-                 L92 66
-                 C74 78 62 108 62 148
-                 L62 236
-                 C62 262 82 282 130 282
-                 C178 282 198 262 198 236
-                 L198 148
-                 C198 108 186 78 168 66
-                 L164 38
-                 Z"
-              fill="url(#glassGrad)"
-              stroke="rgba(150,113,68,0.38)"
-              stroke-width="2"/>
-        <!-- brilho -->
-        <path d="M84 90 C74 118 72 160 74 210" stroke="rgba(255,255,255,0.85)" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <!-- papel do selo, com bordas picotadas -->
+        <path d="M10 6a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 12.0 0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 0 12.0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 -12.0 0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0a6.0 6.0 0 0 0 0 -12.0z"
+              fill="#fdfaf2"/>
+        <!-- moldura interna pontilhada -->
+        <rect x="24" y="22" width="212" height="256" fill="none"
+              stroke="rgba(47,55,51,0.34)" stroke-width="0.9" stroke-dasharray="2 3"/>
+
+        <!-- pote em traço fino -->
+        <g transform="translate(36.4 30.8) scale(0.72)"
+           stroke="#2f3733" stroke-width="2.3" fill="none"
+           stroke-linecap="round" stroke-linejoin="round">
+          <!-- tampa -->
+          <rect x="88" y="18" width="84" height="20" rx="4"/>
+          <rect x="94" y="8" width="72" height="12" rx="4"/>
+          <!-- corpo -->
+          <path d="M96 38
+                   L92 66
+                   C74 78 62 108 62 148
+                   L62 236
+                   C62 262 82 282 130 282
+                   C178 282 198 262 198 236
+                   L198 148
+                   C198 108 186 78 168 66
+                   L164 38
+                   Z"/>
+          <!-- brilho -->
+          <path d="M84 96 C76 120 74 158 76 200" stroke-width="1.6" opacity="0.45"/>
+        </g>
       </svg>
       <div class="notes-layer" id="notesLayer"></div>
-      <div class="empty-msg" id="emptyMsg">ainda não há<br>nenhum papelzinho aqui</div>
+      <div class="empty-msg" id="emptyMsg">ainda vazio</div>
+      <div class="count" id="count">o pote está vazio</div>
     </div>
-    <div class="count" id="count">o pote está vazio</div>
   </aside>
 </main>
 
@@ -495,11 +497,12 @@
     <div class="drawn-label">você guardou isto</div>
     <div class="drawn-text" id="drawnText">—</div>
     <div class="drawn-date" id="drawnDate"></div>
+    <div class="signature">com carinho</div>
     <button class="close-x" id="closeBtn">dobrar e guardar de volta</button>
   </div>
 </div>
 
-<div class="toast" id="toast">guardado no pote ✦</div>
+<div class="toast" id="toast">guardado no pote</div>
 
 <script>
 (function(){
@@ -574,15 +577,12 @@
   function makeChip(){
     const chip = document.createElement('div');
     chip.className = 'note-chip';
-    const left = 26 + Math.random() * 44;   // faixa interna do vidro
-    const bottom = Math.random() * 42;      // se acomodam no fundo
+    const left = 6 + Math.random() * 66;
+    const bottom = Math.random() * 44;
     const rot = (Math.random() * 50 - 25).toFixed(1);
     chip.style.left = left + '%';
     chip.style.bottom = bottom + '%';
     chip.style.setProperty('--rot', rot + 'deg');
-    chip.style.background = Math.random() > 0.5
-      ? 'linear-gradient(135deg, #f6dfb2, #e3c084)'
-      : 'linear-gradient(135deg, #f2d5a2, #dcb473)';
     return chip;
   }
 
@@ -630,7 +630,7 @@
     renderChip();
     updateCount();
     await persistNotes();
-    showToast('guardado no pote ✦');
+    showToast('guardado no pote');
   }
 
   function drawNote(){
