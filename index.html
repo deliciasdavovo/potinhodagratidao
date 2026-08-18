@@ -59,22 +59,24 @@
     padding:clamp(18px,3.4vh,44px) clamp(20px,4.5vw,56px);
     display:grid;
     grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);
-    align-items:center;
-    gap:clamp(24px,5vw,64px);
+    grid-template-areas:
+      "head jar"
+      "form jar";
+    align-content:center;
+    column-gap:clamp(24px,5vw,64px);
+    row-gap:clamp(14px,2.4vh,24px);
   }
 
-  .col-left{
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    min-width:0;
-  }
+  .head{ grid-area:head; min-width:0; }
+  .form{ grid-area:form; min-width:0; }
 
-  .col-right{
+  .jar-col{
+    grid-area:jar;
+    align-self:center;
+    justify-self:center;
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:center;
     min-width:0;
   }
 
@@ -91,7 +93,7 @@
     font-family:'Cormorant Garamond', serif;
     font-weight:600;
     font-style:italic;
-    font-size:clamp(34px,4.6vw,52px);
+    font-size:clamp(29px,3.7vw,42px);
     line-height:1.05;
     color:var(--ink);
     margin:0 0 10px;
@@ -150,8 +152,8 @@
 
   .note-chip{
     position:absolute;
-    width:22px;
-    height:16px;
+    width:calc(var(--jar-h) * 0.065);
+    height:calc(var(--jar-h) * 0.047);
     background:linear-gradient(135deg, var(--paper), var(--paper-2));
     border-radius:2px;
     box-shadow:0 1px 3px rgba(120,90,50,0.22), inset 0 0 0 1px rgba(255,255,255,0.45);
@@ -389,21 +391,28 @@
   }
   .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 
-  /* uma coluna: celular e telas baixas */
+  /* telas estreitas ou baixas: pote menor, ao lado do título */
   @media (max-width:860px), (max-height:600px){
-    body{ overflow:auto; }
     .wrap{
-      height:auto;
-      min-height:100%;
-      grid-template-columns:1fr;
-      justify-items:center;
-      gap:clamp(16px,3vh,28px);
-      padding:28px 22px 40px;
+      grid-template-columns:minmax(0,1fr) auto;
+      grid-template-areas:
+        "head jar"
+        "form form";
+      column-gap:clamp(14px,3vw,26px);
+      row-gap:clamp(14px,2.6vh,24px);
+      padding:clamp(18px,3vh,32px) clamp(18px,5vw,28px);
     }
-    .col-left{ align-items:center; text-align:center; max-width:460px; width:100%; order:2; }
-    .col-right{ order:1; }
-    .sub{ max-width:34ch; }
-    .jar-stage{ --jar-h:clamp(200px,34vh,260px); }
+    .jar-col{ align-self:start; max-width:44vw; }
+    .jar-stage{ --jar-h:clamp(150px,24vh,210px); }
+    .sub{ max-width:none; }
+    .count{ margin-top:10px; font-size:11.5px; }
+    .empty-msg{ font-size:11.5px; }
+  }
+
+  /* espaço muito curto: libera a rolagem em vez de espremer */
+  @media (max-height:480px){
+    body{ overflow:auto; }
+    .wrap{ height:auto; min-height:100%; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -417,11 +426,13 @@
 <div class="glowfield"></div>
 
 <main class="wrap">
-  <section class="col-left">
+  <header class="head">
     <div class="eyebrow">um ritual diário</div>
     <h1>Pote da Gratidão</h1>
     <p class="sub">Guarde aqui um motivo de cada dia. Quando precisar de luz, tire um papelzinho e leia de novo.</p>
+  </header>
 
+  <section class="form">
     <div class="card">
       <button class="btn-suggest" id="suggestBtn">✦ me dá uma ideia</button>
       <div class="suggest-text" id="suggestText"></div>
@@ -437,7 +448,7 @@
     </div>
   </section>
 
-  <aside class="col-right">
+  <aside class="jar-col">
     <div class="jar-stage">
       <div class="jar-glow"></div>
       <svg class="jar-svg" viewBox="0 0 260 300" fill="none">
